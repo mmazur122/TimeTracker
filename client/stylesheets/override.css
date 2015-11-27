@@ -1,0 +1,21 @@
+.center {
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+#main {
+    margin-top: 80px !important;
+    margin-left: 0px !important;
+    background: #F2F2F2;
+}
+
+body {
+    background: #F2F2F2;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
