@@ -14,29 +14,46 @@ function unCamelCase(string) {
 }
 
 Meteor.timeTracker.reactComponents.header = React.createClass({
-    menuLinks: ["home", "startTracking", "features", "login"],
-    getInitialState() {
-        return ({activeLink: "home"});
-    },
-    checkIfActive(linkContext) {
-        return linkContext.name === this.state.activeLink ? "active" : "";
+    mixins: [ReactMeteorData],
+    getMeteorData() {
+        var _data = {};
+        if (Meteor.userId()) {
+            _data.menuLinks = ["home", "startTracking", "features", "logout"];
+        } else {
+            _data.menuLinks = ["home", "startTracking", "features", "login"];
+        }
+        return _data;
     },
     getMenuLinks() {
         var _markup = [];
-        _.each(this.props.menuLinks, (menuLinkName, index) => {
+        _.each(this.data.menuLinks, (menuLinkName, index) => {
             console.log("this inside getMenuLinks: ", this);
-            _markup.push(<li className={"topNav " + this.checkIfActive(menuLinkName)} onClick={this.changeActiveLink.bind(this, menuLinkName)} key={index}><a>{unCamelCase(menuLinkName)}</a></li>);
+            _markup.push(<li className="topNav"
+                             onClick={this.changeRoute.bind(this, menuLinkName)} key={index}>
+                <a>{unCamelCase(menuLinkName)}</a></li>);
         });
 
-        var _ret = _markup.map(function(node) {
+        var _ret = _markup.map(function (node) {
             return node;
         });
 
         return _ret;
     },
-    changeActiveLink(linkName) {
+    changeRoute(linkName) {
         this.setState({activeLink: linkName});
-        this.props.refreshTracker.set(linkName);
+        FlowRouter.go("/" + linkName);
+    },
+    goHome() {
+        FlowRouter.go("/home");
+    },
+    getLoggedInMenu() {
+        var _ret = "";
+        var _user = Meteor.user();
+        if (_user) {
+            _ret = _user.name || "Unknown name";
+        }
+
+        return _ret;
     },
     render() {
         return (
@@ -44,7 +61,7 @@ Meteor.timeTracker.reactComponents.header = React.createClass({
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4">
-                            <a href="/" id="myBrand">&nbsp;</a>
+                            <a onClick={this.goHome} id="myBrand">&nbsp;</a>
 
                             <h2>Time Tracker</h2>
                         </div>
@@ -53,6 +70,7 @@ Meteor.timeTracker.reactComponents.header = React.createClass({
                                 {this.getMenuLinks()}
                             </ul>
                         </div>
+                        <div className="pull-right">{this.getLoggedInMenu()}</div>
                     </div>
                 </div>
             </div>

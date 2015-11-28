@@ -2,6 +2,7 @@
   <library name="meteor-packages-auto-import-browser" type="javaScript">
     <properties>
       <sourceFilesUrls>
+        <item url="file://$USER_HOME$/.meteor/packages/kadira_react-layout/1.5.2/web.browser/lib/react_layout.js" />
         <item url="file://$USER_HOME$/.meteor/packages/promise/0.5.1/web.browser/.npm/package/node_modules/meteor-promise/promise.bundle.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ecmascript-runtime/0.2.6/web.browser/.npm/package/node_modules/meteor-ecmascript-runtime/client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/random/1.0.5/web.browser/deprecated.js" />
@@ -22,6 +23,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/accounts-ui-unstyled/1.1.8/web.browser/login_buttons_single.js" />
         <item url="file://$USER_HOME$/.meteor/packages/babel-runtime/0.1.4/web.browser/packages/babel-runtime.js" />
         <item url="file://$USER_HOME$/.meteor/packages/react/0.14.1_1/web.browser/react.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/cosmos_browserify/0.4.0/web.browser/packages/cosmos_browserify.js" />
         <item url="file://$USER_HOME$/.meteor/packages/geojson-utils/1.0.4/web.browser/packages/geojson-utils.js" />
         <item url="file://$USER_HOME$/.meteor/packages/spacebars/1.0.7/web.browser/packages/spacebars.js" />
         <item url="file://$USER_HOME$/.meteor/packages/base64/1.0.4/web.browser/packages/base64.js" />
@@ -63,9 +65,16 @@
         <item url="file://$USER_HOME$/.meteor/packages/reactive-var/1.0.6/web.browser/packages/reactive-var.js" />
         <item url="file://$USER_HOME$/.meteor/packages/npm-bcrypt/0.7.8_2/web.browser/packages/npm-bcrypt.js" />
         <item url="file://$USER_HOME$/.meteor/packages/reload/1.1.4/web.browser/packages/reload.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client.browserify.js" />
         <item url="file://$USER_HOME$/.meteor/packages/retry/1.0.4/web.browser/packages/retry.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/lib/router.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client/group.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client/router.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client/triggers.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client/_init.js" />
         <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.10.0/web.browser/packages/momentjs_moment.js" />
         <item url="file://$USER_HOME$/.meteor/packages/tracker/1.0.9/web.browser/deprecated.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client/route.js" />
         <item url="file://$USER_HOME$/.meteor/packages/tracker/1.0.9/web.browser/tracker.js" />
         <item url="file://$USER_HOME$/.meteor/packages/observe-sequence/1.0.7/web.browser/packages/observe-sequence.js" />
         <item url="file://$USER_HOME$/.meteor/packages/mongo-id/1.0.1/web.browser/packages/mongo-id.js" />
@@ -83,6 +92,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/ddp-common/1.2.2/web.browser/namespace.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-common/1.2.2/web.browser/utils.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-common/1.2.2/web.browser/heartbeat.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/pahans_reactive-modal/1.0.2/web.browser/packages/pahans:reactive-modal.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-rate-limiter/1.0.0/web.browser/packages/ddp-rate-limiter.js" />
         <item url="file://$USER_HOME$/.meteor/packages/url/1.0.5/web.browser/packages/url.js" />
         <item url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.4/web.browser/password_client.js" />
@@ -90,6 +100,7 @@
       </sourceFilesUrls>
     </properties>
     <CLASSES>
+      <root url="file://$USER_HOME$/.meteor/packages/kadira_react-layout/1.5.2/web.browser/lib/react_layout.js" />
       <root url="file://$USER_HOME$/.meteor/packages/promise/0.5.1/web.browser/.npm/package/node_modules/meteor-promise/promise.bundle.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ecmascript-runtime/0.2.6/web.browser/.npm/package/node_modules/meteor-ecmascript-runtime/client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/random/1.0.5/web.browser/deprecated.js" />
@@ -110,6 +121,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/accounts-ui-unstyled/1.1.8/web.browser/login_buttons_single.js" />
       <root url="file://$USER_HOME$/.meteor/packages/babel-runtime/0.1.4/web.browser/packages/babel-runtime.js" />
       <root url="file://$USER_HOME$/.meteor/packages/react/0.14.1_1/web.browser/react.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/cosmos_browserify/0.4.0/web.browser/packages/cosmos_browserify.js" />
       <root url="file://$USER_HOME$/.meteor/packages/geojson-utils/1.0.4/web.browser/packages/geojson-utils.js" />
       <root url="file://$USER_HOME$/.meteor/packages/spacebars/1.0.7/web.browser/packages/spacebars.js" />
       <root url="file://$USER_HOME$/.meteor/packages/base64/1.0.4/web.browser/packages/base64.js" />
@@ -151,9 +163,16 @@
       <root url="file://$USER_HOME$/.meteor/packages/reactive-var/1.0.6/web.browser/packages/reactive-var.js" />
       <root url="file://$USER_HOME$/.meteor/packages/npm-bcrypt/0.7.8_2/web.browser/packages/npm-bcrypt.js" />
       <root url="file://$USER_HOME$/.meteor/packages/reload/1.1.4/web.browser/packages/reload.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client.browserify.js" />
       <root url="file://$USER_HOME$/.meteor/packages/retry/1.0.4/web.browser/packages/retry.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/lib/router.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client/group.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client/router.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client/triggers.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client/_init.js" />
       <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.10.0/web.browser/packages/momentjs_moment.js" />
       <root url="file://$USER_HOME$/.meteor/packages/tracker/1.0.9/web.browser/deprecated.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/kadira_flow-router/2.10.0/web.browser/client/route.js" />
       <root url="file://$USER_HOME$/.meteor/packages/tracker/1.0.9/web.browser/tracker.js" />
       <root url="file://$USER_HOME$/.meteor/packages/observe-sequence/1.0.7/web.browser/packages/observe-sequence.js" />
       <root url="file://$USER_HOME$/.meteor/packages/mongo-id/1.0.1/web.browser/packages/mongo-id.js" />
@@ -171,6 +190,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/ddp-common/1.2.2/web.browser/namespace.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-common/1.2.2/web.browser/utils.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-common/1.2.2/web.browser/heartbeat.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/pahans_reactive-modal/1.0.2/web.browser/packages/pahans:reactive-modal.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-rate-limiter/1.0.0/web.browser/packages/ddp-rate-limiter.js" />
       <root url="file://$USER_HOME$/.meteor/packages/url/1.0.5/web.browser/packages/url.js" />
       <root url="file://$USER_HOME$/.meteor/packages/accounts-password/1.1.4/web.browser/password_client.js" />

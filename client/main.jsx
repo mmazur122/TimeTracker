@@ -39,6 +39,22 @@ var App = React.createClass({
     }
 });
 
-Template.transitionPane.onRendered(function () {
-    ReactDOM.render(<App />, $("#appContainer")[0]);
+Meteor.timeTracker.reactComponents.flowRouterLayout = React.createClass({
+    render() {
+        var _header = Meteor.timeTracker.reactComponents.header;
+        var _menuLinks = ["home", "startTracking", "features", "login"];
+        return (
+            <div className="container-fluid">
+                <div id="wrapper">
+                    <_header menuLinks={_menuLinks}/>
+                    <div className="container">
+                        <div id="main">
+                            {this.props.content}
+                        </div>
+                    </div>
+                </div>
+                <div id="footer"></div>
+            </div>
+        );
+    }
 });
