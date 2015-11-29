@@ -56,6 +56,8 @@ Meteor.timeTracker.reactComponents.signUpForm = React.createClass({
                 }
             });
         }
+
+        Projects.insert({projects: []});
     },
     switchToLogin() {
         FlowRouter.go("/login");

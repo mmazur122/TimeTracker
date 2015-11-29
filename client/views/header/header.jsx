@@ -18,7 +18,7 @@ Meteor.timeTracker.reactComponents.header = React.createClass({
     getMeteorData() {
         var _data = {};
         if (Meteor.userId()) {
-            _data.menuLinks = ["home", "startTracking", "features", "logout"];
+            _data.menuLinks = ["home", "startTracking", "projects", "features", "logout"];
         } else {
             _data.menuLinks = ["home", "startTracking", "features", "login"];
         }
@@ -50,7 +50,7 @@ Meteor.timeTracker.reactComponents.header = React.createClass({
         var _ret = "";
         var _user = Meteor.user();
         if (_user) {
-            _ret = _user.name || "Unknown name";
+            _ret = _user.emails[0].address || "Unknown name";
         }
 
         return _ret;
@@ -69,8 +69,10 @@ Meteor.timeTracker.reactComponents.header = React.createClass({
                             <ul className="main-nav hidden-xs hidden-sm">
                                 {this.getMenuLinks()}
                             </ul>
+                            <ul className="main-nav hidden-xs hidden-sm pull-right">
+                                <li className="topNav"><a>{this.getLoggedInMenu()}</a></li>
+                            </ul>
                         </div>
-                        <div className="pull-right">{this.getLoggedInMenu()}</div>
                     </div>
                 </div>
             </div>

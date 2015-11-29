@@ -39,6 +39,16 @@ FlowRouter.route("/logout", {
     }
 });
 
+FlowRouter.route("/projects", {
+    name: "projects",
+    action() {
+        var FlowRouterLayout = Meteor.timeTracker.reactComponents.flowRouterLayout;
+        ReactLayout.render(FlowRouterLayout, {
+            content: <Meteor.timeTracker.reactComponents.manageProjects />
+        });
+    }
+});
+
 FlowRouter.route("/startTracking", {
     name: "start tracking",
     action() {

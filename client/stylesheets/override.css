@@ -10,6 +10,10 @@
     background: #F2F2F2;
 }
 
+.container {
+    width: 1100px !important;
+}
+
 body {
     background: #F2F2F2;
 }
