@@ -8,16 +8,6 @@ if (!Meteor.timeTracker.reactComponents) {
     Meteor.timeTracker.reactComponents = {};
 }
 
-function checkEmailIsValid(aString) {
-    aString = aString || '';
-    return aString.length > 1 && aString.indexOf('@') > -1;
-};
-
-function checkPasswordIsValid(aString) {
-    aString = aString || '';
-    return aString.length >= 6;
-}
-
 Meteor.timeTracker.reactComponents.signUpForm = React.createClass({
     getInitialState() {
         return {activeContent: "login"};
@@ -32,16 +22,16 @@ Meteor.timeTracker.reactComponents.signUpForm = React.createClass({
     signUp(event) {
         event.preventDefault();
         event.stopPropagation();
-        var emailAddress = $("#emailAddressInput").val() || '';
-        var password = $("#passwordInput").val() || '';
+        var _emailAddress = $("#emailAddressInput").val() || '';
+        var _password = $("#passwordInput").val() || '';
 
         //trim white spaces
-        emailAddress = emailAddress.replace(/^\s*|\s*$/g, '');
-        password = password.replace(/^\s*|\s*$/g, '');
+        _emailAddress = _emailAddress.replace(/^\s*|\s*$/g, '');
+        _password = _password.replace(/^\s*|\s*$/g, '');
 
         //validate
-        var isValidEmail = checkEmailIsValid(emailAddress);
-        var isValidPassword = checkPasswordIsValid(password);
+        var isValidEmail = Meteor.timeTracker.globalFunctions.checkEmailIsValid(_emailAddress);
+        var isValidPassword = Meteor.timeTracker.globalFunctions.checkPasswordIsValid(_password);
 
         if (!isValidEmail || !isValidPassword) {
             var _errorMessages = [];
@@ -49,17 +39,17 @@ Meteor.timeTracker.reactComponents.signUpForm = React.createClass({
                 _errorMessages.push("Invalid email address.");
             }
             if (!isValidPassword) {
-                _errorMessages.push("Your password must be at least 8 characters long.");
+                _errorMessages.push("Your password must be at least 6 characters long.");
             }
             var _errorContext = {title: "Sign-up Error", messages: _errorMessages};
             Meteor.timeTracker.modals.authenticationError(_errorContext);
         } else {
             Accounts.createUser({
-                email: emailAddress,
-                password: password
+                email: _emailAddress,
+                password: _password
             }, function (error) {
                 if (error) {
-                    var _errorContext = {title: "Sign-up Error", messages: ["Account creation failed for unknown reasons :("]};
+                    var _errorContext = {title: "Sign-up Error", messages: [error.reason]};
                     Meteor.timeTracker.modals.authenticationError(_errorContext);
                 } else {
                     FlowRouter.go("/home");
@@ -92,8 +82,8 @@ Meteor.timeTracker.reactComponents.signUpForm = React.createClass({
                                     <button className="btn btn-primary" onClick={this.signUp}>Sign Up</button>
                                 </div>
                                 <p>Already have an account? Click
-                                    <button className="btn btn-primary" onClick={this.switchToLogin}>Here</button>
-                                      to sign up
+                                    &nbsp;<button className="btn btn-primary" onClick={this.switchToLogin}>Here</button>&nbsp;
+                                      to log in
                                 </p>
                             </div>
                         </div>
