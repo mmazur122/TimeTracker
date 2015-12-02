@@ -15,6 +15,9 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
         _data.projects = Projects.find({userId: Meteor.userId()}).projects;
         return _data;
     },
+    createProject() {
+        FlowRouter.go("/createProject");
+    },
     getProjects() {
         var _markup = [];
         if (this.data && this.data.projects && this.data.projects.length !== 0) {
@@ -32,7 +35,7 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
         } else {
             var _node = <div>
                 <p>Oops! Looks like you don't have any projects. Would you like to create one?</p>
-                <button className="btn btn-primary">Create Project</button>
+                <button className="btn btn-primary" onClick={this.createProject}>Create Project</button>
                 </div>;
 
             _markup.push(_node);

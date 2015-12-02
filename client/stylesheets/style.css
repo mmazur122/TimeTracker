@@ -136,3 +136,11 @@ li.emojiPicker:hover {
     font-weight: 200;
     line-height: 30px;
 }
+
+.highlight {
+    background-color: lightgoldenrodyellow;
+}
+
+.box-title {
+    padding: 7px 10px 7px 10px !important;
+}

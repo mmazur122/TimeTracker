@@ -29,3 +29,4 @@ momentjs:moment@=2.10.0
 kadira:flow-router
 kadira:react-layout
 pahans:reactive-modal
+mizzao:jquery-ui
