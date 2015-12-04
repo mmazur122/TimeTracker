@@ -67,15 +67,14 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
             return;
         }
 
-        var _document = Projects.findOne({userId: Meteor.userId()});
-        var _currentProjects = _document.projects;
         var _project = {
             title: $("#projectTitle").val(),
-            steps: this.state.currentDraft
+            steps: this.state.currentDraft,
+            userId: Meteor.userId(),
+            stepsDone: []
         };
-        _currentProjects.push(_project);
-        var _set = {$set: {projects: _currentProjects}};
-        Projects.update({_id: _document._id}, _set,  function(err, records){
+        //var _set = {$set: _project;
+        Projects.insert(_project,  function(err, records){
             if (err) {
                 var _errorContext = {
                     title: "Saving Error",

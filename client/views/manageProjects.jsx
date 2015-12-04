@@ -12,7 +12,7 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
     mixins: [ReactMeteorData],
     getMeteorData() {
         var _data = this.data || {};
-        _data.projects = Projects.findOne({userId: Meteor.userId()}).projects;
+        _data.projects = Projects.find({userId: Meteor.userId()}).fetch();
         return _data;
     },
     createProject() {
@@ -24,7 +24,7 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
         if (this.data && this.data.projects && this.data.projects.length !== 0) {
             _.each(this.data.projects, (project) => {
                 var _node = <li key={_counter++}><i className="fa fa-li fa-check"></i>{project.title ? project.title : "Untitled"}
-                    ({project.stepsDone ? project.stepsDone.length : 0}/{project.steps.length} steps done)</li>;
+                    &nbsp;({project.stepsDone ? project.stepsDone.length : 0}/{project.steps.length} steps done)</li>;
                 _markup.push(_node);
             });
         } else {
