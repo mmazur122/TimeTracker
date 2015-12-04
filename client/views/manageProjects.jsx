@@ -18,13 +18,21 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
     createProject() {
         FlowRouter.go("/createProject");
     },
+    editProject(projectId) {
+        FlowRouter.go("/projects/editProject/" + projectId);
+    },
+    trackTime(projectId) {
+
+    },
     getProjects() {
         var _markup = [];
         var _counter = 0;
         if (this.data && this.data.projects && this.data.projects.length !== 0) {
             _.each(this.data.projects, (project) => {
                 var _node = <li key={_counter++}><i className="fa fa-li fa-check"></i>{project.title ? project.title : "Untitled"}
-                    &nbsp;({project.stepsDone ? project.stepsDone.length : 0}/{project.steps.length} steps done)</li>;
+                    &nbsp;({project.stepsDone ? project.stepsDone.length : 0}/{project.steps.length} steps done)
+                <button className="btn btn-primary pullRight" onClick={this.editProject.bind(this, project._id)}>Edit</button>
+                &nbsp;<button className="btn btn-primary pullRight" onClick={this.trackTime.bind(this, project._id)}>Track Time</button></li>;
                 _markup.push(_node);
             });
         } else {

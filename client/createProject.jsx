@@ -9,8 +9,22 @@ if (!Meteor.timeTracker.reactComponents) {
 }
 
 Meteor.timeTracker.reactComponents.createProject = React.createClass({
+    mixins: [ReactMeteorData],
+    getMeteorData() {
+        var _data = {};
+        if (this.props.projectId) {
+            var _project = Projects.findOne({_id: this.props.projectId});
+            _data = _project ? _project : {};
+        }
+        return _data;
+    },
     getInitialState() {
         return {currentDraft: [], title: "Untitled"};
+    },
+    componentDidMount() {
+        if (!_.isEmpty(this.data)) {
+            this.setState({currentDraft: this.data.steps, title: this.data.title});
+        }
     },
     componentDidUpdate() {
         $("#sortable").sortable({
@@ -58,33 +72,47 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
             Meteor.timeTracker.modals.authenticationError(_errorContext);
             return;
         }
-        if ($("#projectTitle").html() === "Untitled") {
+        if (this.state.title === "Untitled") {
             var _errorContext = {
                 title: "Warning",
-                messages: ["Please change the title of your project by clicking on the title."]
+                messages: ["Please change the title of your project. "]
             };
             Meteor.timeTracker.modals.authenticationError(_errorContext);
             return;
         }
 
         var _project = {
-            title: $("#projectTitle").val(),
+            title: this.state.title,
             steps: this.state.currentDraft,
             userId: Meteor.userId(),
-            stepsDone: []
+            stepsDone: this.data && this.data.stepsDone ? this.data.stepsDone : []
         };
-        //var _set = {$set: _project;
-        Projects.insert(_project,  function(err, records){
-            if (err) {
-                var _errorContext = {
-                    title: "Saving Error",
-                    messages: ["Could not save your project"]
-                };
-                Meteor.timeTracker.modals.authenticationError(_errorContext);
-            } else {
-                FlowRouter.go("/projects");
-            }
-        });
+        if (_.isEmpty(this.data)) {
+            Projects.insert(_project, function (err, records) {
+                if (err) {
+                    var _errorContext = {
+                        title: "Saving Error",
+                        messages: ["Could not save your project"]
+                    };
+                    Meteor.timeTracker.modals.authenticationError(_errorContext);
+                } else {
+                    FlowRouter.go("/projects");
+                }
+            });
+        } else {
+            var $set = {$set: _project};
+            Projects.update({_id: this.props.projectId}, $set, function (err, records) {
+                if (err) {
+                    var _errorContext = {
+                        title: "Saving Error",
+                        messages: ["Could not save your project"]
+                    };
+                    Meteor.timeTracker.modals.authenticationError(_errorContext);
+                } else {
+                    FlowRouter.go("/projects");
+                }
+            });
+        }
     },
     updateTitle(event) {
         this.setState({title: event.target.value});
@@ -112,4 +140,3 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
         );
     }
 });
-//<h3 id="projectTitle" contentEditable="true">{this.state.title}</h3>
