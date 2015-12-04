@@ -70,7 +70,7 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
         var _document = Projects.findOne({userId: Meteor.userId()});
         var _currentProjects = _document.projects;
         var _project = {
-            title: $("#projectTitle").html(),
+            title: $("#projectTitle").val(),
             steps: this.state.currentDraft
         };
         _currentProjects.push(_project);
@@ -95,7 +95,7 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
             <div className="col-md-6 center">
                 <div className="box box-bordered box-color">
                     <div className="box-title">
-                        <input className="form-control" value={this.state.title} onChange={this.updateTitle} placeholder="Project Title"/>
+                        <input id="projectTitle" className="form-control" value={this.state.title} onChange={this.updateTitle} placeholder="Project Title"/>
                     </div>
                     <div className="box-content padding">
                         <div className="braggaList welcome">
