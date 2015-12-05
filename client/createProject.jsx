@@ -42,7 +42,7 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
         var _markup = [];
 
         _.each(this.state.currentDraft, (step, index) => {
-            _markup.push(<li key={index}>{step}<i onClick={this.removeRow.bind(this, index)} style={{"paddingLeft": 20}} className="glyphicon glyphicon-remove"></i></li>)
+            _markup.push(<li key={index}>{step.stepName}<i onClick={this.removeRow.bind(this, index)} style={{"paddingLeft": 20}} className="glyphicon glyphicon-remove"></i></li>)
         });
 
         var _steps = _markup.map((node) => {
@@ -58,7 +58,11 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
     addToList() {
         if (!!$("#newStep").val()) {
             var _currentSteps = this.state.currentDraft;
-            _currentSteps.push($("#newStep").val());
+            _currentSteps.push({
+                stepName: $("#newStep").val(),
+                timeStamp: 0,
+                isDone: false
+            });
             this.setState({currentDraft: _currentSteps});
             $("#newStep").val("");
         }
@@ -84,8 +88,7 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
         var _project = {
             title: this.state.title,
             steps: this.state.currentDraft,
-            userId: Meteor.userId(),
-            stepsDone: this.data && this.data.stepsDone ? this.data.stepsDone : []
+            userId: Meteor.userId()
         };
         if (_.isEmpty(this.data)) {
             Projects.insert(_project, function (err, records) {

@@ -22,19 +22,21 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
         return {stepBeingTimed: ""};
     },
     runStopWatch: null,
-    markAsDone(stepName, stepIsDone) {
+    markAsDone(index) {
         var _currentProject = Projects.findOne({_id: this.props.projectId});
-        var _stepsDone = _currentProject.stepsDone;
-        if (!stepIsDone) {
-            _stepsDone.push(stepName);
-        } else {
-            _stepsDone.splice(_stepsDone.indexOf(stepName), 1);
-        }
-        var $set = {$set: {stepsDone: _stepsDone}};
+        var _steps = _currentProject.steps;
+        _steps[index].isDone = !_steps[index].isDone;
+        var $set = {$set: {steps: _steps}};
         Projects.update({_id: this.props.projectId}, $set);
+        var _relevantStopWatch = this.refs[index];
+        if (_relevantStopWatch.state.clockIsRunning) {
+            Meteor.clearInterval(_relevantStopWatch.runStopWatch);
+            _relevantStopWatch.updateStepTimeStamp();
+            _relevantStopWatch.setState({clockIsRunning: !_relevantStopWatch.state.clockIsRunning});
+        }
     },
-    isStepDone(stepName) {
-        return this.data.stepsDone.indexOf(stepName) > -1;
+    isStepDone(index) {
+        return this.data.steps[index].isDone;
     },
     getTimeEntryInput() {
 
@@ -45,10 +47,10 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
         var _steps = "";
         if (!_.isEmpty(this.data)) {
             _.each(this.data.steps, (step, index) => {
-                var _stepIsDone = _that.isStepDone(step);
-                _markup.push(<li key={index}>{_stepIsDone ? <i className="fa fa-li fa-check"></i> : <i className="fa fa-li fa-times"></i>}{step}
-                <button className="btn btn-primary" onClick={this.markAsDone.bind(this, step, _stepIsDone)}>
-                    {_stepIsDone ? "Not Done" : "Done"}</button><StopWatch timeStamp={0} /></li>)
+                var _stepIsDone = _that.isStepDone(index);
+                _markup.push(<li key={index}>{_stepIsDone ? <i className="fa fa-li fa-check"></i> : <i className="fa fa-li fa-times"></i>}{step.stepName}
+                <button className="btn btn-primary" onClick={this.markAsDone.bind(this, index)}>
+                    {_stepIsDone ? "Not Done" : "Done"}</button><StopWatch ref={index} stepIndex={index} timeStamp={step.timeStamp} projectId={this.props.projectId} /></li>)
             });
 
             _steps = _markup.map((node) => {
@@ -85,6 +87,7 @@ var StopWatch = React.createClass({
     manageStopWatch() {
         if (this.state.clockIsRunning) {
             Meteor.clearInterval(this.runStopWatch);
+            this.updateStepTimeStamp();
         } else {
             var _that = this;
             this.runStopWatch = Meteor.setInterval(() => {
@@ -93,6 +96,13 @@ var StopWatch = React.createClass({
             }, 1000);
         }
         this.setState({clockIsRunning: !this.state.clockIsRunning});
+    },
+    updateStepTimeStamp() {
+        var _currentProject = Projects.findOne({_id: this.props.projectId});
+        var _steps = _currentProject.steps;
+        _steps[this.props.stepIndex].timeStamp = this.state.currentTimeStamp;
+        var $set = {$set: {steps: _steps}};
+        Projects.update({_id: this.props.projectId}, $set);
     },
     formatTimeStamp() {
         console.log("timestamp to be displayed: ", moment().hour(0).minute(0).second(this.state.currentTimeStamp).format('HH : mm : ss'));

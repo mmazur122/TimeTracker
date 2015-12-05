@@ -24,13 +24,33 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
     trackTime(projectId) {
         FlowRouter.go("/projects/startTracking/" + projectId);
     },
+    getNumberOfStepsDone(index) {
+        var _currentProject = this.data.projects[index];
+        var _counter = 0;
+        _.each(_currentProject.steps, (step) => {
+            if (step.isDone) {
+                _counter++;
+            }
+        });
+        return _counter;
+    },
+    getTotalTime(index) {
+        var _currentProject = this.data.projects[index];
+        var _totalTimeStamp = 0;
+        _.each(_currentProject.steps, (step) => {
+            _totalTimeStamp += step.timeStamp;
+        });
+        return moment().hour(0).minute(0).second(_totalTimeStamp).format('HH : mm : ss');
+    },
     getProjects() {
         var _markup = [];
         var _counter = 0;
+        var _that = this;
         if (this.data && this.data.projects && this.data.projects.length !== 0) {
-            _.each(this.data.projects, (project) => {
+            _.each(this.data.projects, (project, index) => {
+                var _numberOfStepsDone = _that.getNumberOfStepsDone(index);
                 var _node = <li key={_counter++}><i className="fa fa-li fa-check"></i>{project.title ? project.title : "Untitled"}
-                    &nbsp;({project.stepsDone ? project.stepsDone.length : 0}/{project.steps.length} steps done)
+                    &nbsp;({_numberOfStepsDone}/{project.steps.length} steps done, total time spent on the project: {_that.getTotalTime(index)})
                 <button className="btn btn-primary pullRight" onClick={this.editProject.bind(this, project._id)}>Edit</button>
                 &nbsp;<button className="btn btn-primary pullRight" onClick={this.trackTime.bind(this, project._id)}>Track Time</button></li>;
                 _markup.push(_node);
