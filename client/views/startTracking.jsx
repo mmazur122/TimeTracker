@@ -18,6 +18,10 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
         }
         return _data;
     },
+    getInitialState() {
+        return {stepBeingTimed: ""};
+    },
+    runStopWatch: null,
     markAsDone(stepName, stepIsDone) {
         var _currentProject = Projects.findOne({_id: this.props.projectId});
         var _stepsDone = _currentProject.stepsDone;
@@ -32,6 +36,9 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
     isStepDone(stepName) {
         return this.data.stepsDone.indexOf(stepName) > -1;
     },
+    getTimeEntryInput() {
+
+    },
     renderList() {
         var _markup = [];
         var _that = this;
@@ -41,7 +48,7 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
                 var _stepIsDone = _that.isStepDone(step);
                 _markup.push(<li key={index}>{_stepIsDone ? <i className="fa fa-li fa-check"></i> : <i className="fa fa-li fa-times"></i>}{step}
                 <button className="btn btn-primary" onClick={this.markAsDone.bind(this, step, _stepIsDone)}>
-                    {_stepIsDone ? "Not Done" : "Done"}</button></li>)
+                    {_stepIsDone ? "Not Done" : "Done"}</button><StopWatch timeStamp={0} /></li>)
             });
 
             _steps = _markup.map((node) => {
@@ -62,13 +69,40 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
                             <ul className="braggaList fa-ul">
                                 {this.renderList()}
                             </ul>
-                            <input id="newStep" className="form-control" placeholder="Enter the next step"/>
-                            <button className="btn btn-primary" onClick={this.addToList}>Add to List</button>
-                            &nbsp;
-                            <button className="btn btn-primary" onClick={this.saveProject}>Save Project</button>
                         </div>
                     </div>
                 </div>
+            </div>
+        );
+    }
+});
+
+var StopWatch = React.createClass({
+    getInitialState() {
+        return ({clockIsRunning: false, currentTimeStamp: this.props.timeStamp});
+    },
+    runStopWatch: null,
+    manageStopWatch() {
+        if (this.state.clockIsRunning) {
+            Meteor.clearInterval(this.runStopWatch);
+        } else {
+            var _that = this;
+            this.runStopWatch = Meteor.setInterval(() => {
+                console.log("refreshing state");
+                _that.setState({currentTimeStamp: _that.state.currentTimeStamp + 1});
+            }, 1000);
+        }
+        this.setState({clockIsRunning: !this.state.clockIsRunning});
+    },
+    formatTimeStamp() {
+        console.log("timestamp to be displayed: ", moment().hour(0).minute(0).second(this.state.currentTimeStamp).format('HH : mm : ss'));
+        return moment().hour(0).minute(0).second(this.state.currentTimeStamp).format('HH : mm : ss');
+    },
+    render() {
+        console.log("rendering stopwatch");
+        return (
+            <div>
+                <div>{this.formatTimeStamp()}</div><button className="btn btn-primary" onClick={this.manageStopWatch}>{this.state.clockIsRunning ? "Stop" : "Start"}</button>
             </div>
         );
     }
