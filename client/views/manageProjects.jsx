@@ -22,7 +22,7 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
         FlowRouter.go("/projects/editProject/" + projectId);
     },
     trackTime(projectId) {
-
+        FlowRouter.go("/projects/startTracking/" + projectId);
     },
     getProjects() {
         var _markup = [];

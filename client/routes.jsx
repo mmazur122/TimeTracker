@@ -67,12 +67,12 @@ FlowRouter.route("/createProject", {
 });
 
 
-FlowRouter.route("/startTracking", {
+FlowRouter.route("/projects/startTracking/:projectId", {
     name: "start tracking",
-    action() {
+    action(params) {
         var FlowRouterLayout = Meteor.timeTracker.reactComponents.flowRouterLayout;
         ReactLayout.render(FlowRouterLayout, {
-            content: <Meteor.timeTracker.reactComponents.startTracking />
+            content: <Meteor.timeTracker.reactComponents.startTracking projectId={params.projectId}/>
         });
     }
 });
