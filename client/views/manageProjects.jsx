@@ -49,7 +49,7 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
         if (this.data && this.data.projects && this.data.projects.length !== 0) {
             _.each(this.data.projects, (project, index) => {
                 var _numberOfStepsDone = _that.getNumberOfStepsDone(index);
-                var _node = <li key={_counter++}><i className="fa fa-li fa-check"></i>{project.title ? project.title : "Untitled"}
+                var _node = <li key={_counter++}>{_numberOfStepsDone === project.steps.length ? <i className="fa fa-li fa-check"></i> : <i className="fa fa-li fa-times"></i>}{project.title ? project.title : "Untitled"}
                     &nbsp;({_numberOfStepsDone}/{project.steps.length} steps done, total time spent on the project: {_that.getTotalTime(index)})
                 <button className="btn btn-primary pullRight" onClick={this.editProject.bind(this, project._id)}>Edit</button>
                 &nbsp;<button className="btn btn-primary pullRight" onClick={this.trackTime.bind(this, project._id)}>Track Time</button></li>;

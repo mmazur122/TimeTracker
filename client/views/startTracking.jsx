@@ -18,9 +18,6 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
         }
         return _data;
     },
-    getInitialState() {
-        return {stepBeingTimed: ""};
-    },
     runStopWatch: null,
     markAsDone(index) {
         var _currentProject = Projects.findOne({_id: this.props.projectId});
@@ -34,12 +31,18 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
             _relevantStopWatch.updateStepTimeStamp();
             _relevantStopWatch.setState({clockIsRunning: !_relevantStopWatch.state.clockIsRunning});
         }
+        if (this.allStepsAreDone(_steps)) {
+            var _errorContext = {title: "Congratulations", messages: ["You have just completed all steps in your project - " + this.data.title + "!"]};
+            Meteor.timeTracker.modals.authenticationError(_errorContext);
+        }
+    },
+    allStepsAreDone(steps) {
+        return _.every(steps, (step) => {
+            return step.isDone;
+        })
     },
     isStepDone(index) {
         return this.data.steps[index].isDone;
-    },
-    getTimeEntryInput() {
-
     },
     renderList() {
         var _markup = [];
@@ -50,7 +53,7 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
                 var _stepIsDone = _that.isStepDone(index);
                 _markup.push(<li key={index}>{_stepIsDone ? <i className="fa fa-li fa-check"></i> : <i className="fa fa-li fa-times"></i>}{step.stepName}
                 <button className="btn btn-primary" onClick={this.markAsDone.bind(this, index)}>
-                    {_stepIsDone ? "Not Done" : "Done"}</button><StopWatch ref={index} stepIndex={index} timeStamp={step.timeStamp} projectId={this.props.projectId} /></li>)
+                    {_stepIsDone ? "Not Done" : "Done"}</button><StopWatch ref={index} stepIndex={index} timeStamp={step.timeStamp} isDone={step.isDone} projectId={this.props.projectId} /></li>)
             });
 
             _steps = _markup.map((node) => {
@@ -58,6 +61,9 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
             });
         }
         return _steps;
+    },
+    backToProjects() {
+        FlowRouter.go("/projects");
     },
     render() {
         return (
@@ -72,6 +78,7 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
                                 {this.renderList()}
                             </ul>
                         </div>
+                        <button className="btn btn-primary" onClick={this.backToProjects}>Back to Projects</button>
                     </div>
                 </div>
             </div>
@@ -105,14 +112,13 @@ var StopWatch = React.createClass({
         Projects.update({_id: this.props.projectId}, $set);
     },
     formatTimeStamp() {
-        console.log("timestamp to be displayed: ", moment().hour(0).minute(0).second(this.state.currentTimeStamp).format('HH : mm : ss'));
         return moment().hour(0).minute(0).second(this.state.currentTimeStamp).format('HH : mm : ss');
     },
     render() {
-        console.log("rendering stopwatch");
         return (
             <div>
-                <div>{this.formatTimeStamp()}</div><button className="btn btn-primary" onClick={this.manageStopWatch}>{this.state.clockIsRunning ? "Stop" : "Start"}</button>
+                <div>{this.formatTimeStamp()}</div>
+                {this.props.isDone ? "" : <button className="btn btn-primary" onClick={this.manageStopWatch}>{this.state.clockIsRunning ? "Stop" : "Start"}</button>}
             </div>
         );
     }
