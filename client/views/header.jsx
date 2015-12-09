@@ -55,7 +55,6 @@ Meteor.timeTracker.reactComponents.header = React.createClass({
         if (_user) {
             _ret = _user.emails[0].address || "Unknown name";
         }
-
         return _ret;
     },
     render() {
