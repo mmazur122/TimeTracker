@@ -40,7 +40,7 @@ Meteor.timeTracker.reactComponents.loginForm = React.createClass({
                     var _errorContext = {title: "Login Error", messages: [error.reason]};
                     Meteor.timeTracker.modals.authenticationError(_errorContext);
                 } else {
-                    FlowRouter.go("/home");
+                    FlowRouter.go("/");
                 }
             });
         }
@@ -66,7 +66,7 @@ Meteor.timeTracker.reactComponents.loginForm = React.createClass({
                                     <h4>Password:</h4>
                                     <input id="passwordInput" className="form-control" type="password"/>
                                 </div>
-                                <div>
+                                <div className="loginButton">
                                     <button className="btn btn-primary" onClick={this.login}>Login</button>
                                 </div>
                                 <p>Don't have an account yet? Click

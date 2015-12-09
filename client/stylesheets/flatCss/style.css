@@ -5330,7 +5330,7 @@ label, input, button, select, textarea {
   border-top-color: #333;
 }
 #navigation .main-nav > li.open > a {
-  background: #1e74c5;
+  background: #A5741B;
   text-decoration: none;
 }
 #navigation .main-nav > li.open > a .caret {
@@ -5358,7 +5358,7 @@ label, input, button, select, textarea {
 }
 #navigation .main-nav > li > a:hover {
   text-decoration: none;
-  background: #1e74c5;
+  background: #A5741B;
 }
 #navigation .main-nav > li > a:hover .caret {
   border-top-color: #fff;

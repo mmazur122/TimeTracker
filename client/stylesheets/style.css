@@ -167,3 +167,7 @@ html {
 body {
     background-color: transparent !important;
 }
+
+.loginButton {
+    padding-bottom: 20px;
+}

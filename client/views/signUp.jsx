@@ -78,7 +78,7 @@ Meteor.timeTracker.reactComponents.signUpForm = React.createClass({
                                     <h4>Password: (at least 6 characters long)</h4>
                                     <input id="passwordInput" className="form-control" type="password"/>
                                 </div>
-                                <div>
+                                <div className="loginButton">
                                     <button className="btn btn-primary" onClick={this.signUp}>Sign Up</button>
                                 </div>
                                 <p>Already have an account? Click
