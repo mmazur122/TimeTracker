@@ -67,18 +67,20 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
     },
     render() {
         return (
-            <div className="col-md-6 center">
-                <div className="box box-bordered box-color">
-                    <div className="box-title">
-                        <h3>{!_.isEmpty(this.data) ? this.data.title : "Loading your project"}</h3>
-                    </div>
-                    <div className="box-content padding">
-                        <div className="braggaList welcome">
-                            <ul className="braggaList fa-ul">
-                                {this.renderList()}
-                            </ul>
+            <div className="row">
+                <div className="col-md-6 center">
+                    <div className="box box-bordered box-color">
+                        <div className="box-title">
+                            <h3>{!_.isEmpty(this.data) ? this.data.title : "Loading your project"}</h3>
                         </div>
-                        <button className="btn btn-primary" onClick={this.backToProjects}>Back to Projects</button>
+                        <div className="box-content padding">
+                            <div className="braggaList welcome">
+                                <ul className="braggaList fa-ul">
+                                    {this.renderList()}
+                                </ul>
+                            </div>
+                            <button className="btn btn-primary" onClick={this.backToProjects}>Back to Projects</button>
+                        </div>
                     </div>
                 </div>
             </div>

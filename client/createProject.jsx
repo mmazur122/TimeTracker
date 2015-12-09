@@ -122,20 +122,23 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
     },
     render() {
         return (
-            <div className="col-md-6 center">
-                <div className="box box-bordered box-color">
-                    <div className="box-title">
-                        <input id="projectTitle" className="form-control" value={this.state.title} onChange={this.updateTitle} placeholder="Project Title"/>
-                    </div>
-                    <div className="box-content padding">
-                        <div className="braggaList welcome">
-                            <ul id="sortable" className="braggaList">
-                                {this.renderList()}
-                            </ul>
-                            <input id="newStep" className="form-control" placeholder="Enter the next step"/>
-                            <button className="btn btn-primary" onClick={this.addToList}>Add to List</button>
-                            &nbsp;
-                            <button className="btn btn-primary" onClick={this.saveProject}>Save Project</button>
+            <div className="row">
+                <div className="col-md-6 center">
+                    <div className="box box-bordered box-color">
+                        <div className="box-title">
+                            <input id="projectTitle" className="form-control" value={this.state.title}
+                                   onChange={this.updateTitle} placeholder="Project Title"/>
+                        </div>
+                        <div className="box-content padding">
+                            <div className="braggaList welcome">
+                                <ul id="sortable" className="braggaList">
+                                    {this.renderList()}
+                                </ul>
+                                <input id="newStep" className="form-control" placeholder="Enter the next step"/>
+                                <button className="btn btn-primary" onClick={this.addToList}>Add to List</button>
+                                &nbsp;
+                                <button className="btn btn-primary" onClick={this.saveProject}>Save Project</button>
+                            </div>
                         </div>
                     </div>
                 </div>

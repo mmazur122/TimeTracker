@@ -96,7 +96,3 @@ FlowRouter.route("/features", {
         });
     }
 });
-
-var setActiveLink = function() {
-    Session.set("activeUrl", FlowRouter.current().route.path);
-};
