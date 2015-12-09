@@ -5330,7 +5330,7 @@ label, input, button, select, textarea {
   border-top-color: #333;
 }
 #navigation .main-nav > li.open > a {
-  background: #A5741B;
+  background: #1e74c5;
   text-decoration: none;
 }
 #navigation .main-nav > li.open > a .caret {

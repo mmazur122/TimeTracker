@@ -68,7 +68,7 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
     render() {
         return (
             <div className="row">
-                <div className="col-md-6 center">
+                <div className="col-md-10 center">
                     <div className="box box-bordered box-color">
                         <div className="box-title">
                             <h3>{!_.isEmpty(this.data) ? this.data.title : "Loading your project"}</h3>
@@ -112,6 +112,9 @@ var StopWatch = React.createClass({
         _steps[this.props.stepIndex].timeStamp = this.state.currentTimeStamp;
         var $set = {$set: {steps: _steps}};
         Projects.update({_id: this.props.projectId}, $set);
+    },
+    componentWillUnmount() {
+        this.updateStepTimeStamp();
     },
     formatTimeStamp() {
         return moment().hour(0).minute(0).second(this.state.currentTimeStamp).format('HH : mm : ss');

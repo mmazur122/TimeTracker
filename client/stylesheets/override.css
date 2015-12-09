@@ -42,3 +42,22 @@
 #navigation {
     background: #CA8B19 !important;
 }
+
+.btn.btn-primary {
+    background: #CA8B19 !important;
+}
+.btn.btn-primary:hover {
+    background: #A5741B !important;
+}
+
+.modal-content {
+    border: #772222 !important;
+}
+
+.modal-header {
+    background: #CA8B19 !important;
+}
+
+.modal-footer {
+    border-top: #772222 !important;
+}
