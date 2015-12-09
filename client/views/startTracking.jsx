@@ -51,9 +51,13 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
         if (!_.isEmpty(this.data)) {
             _.each(this.data.steps, (step, index) => {
                 var _stepIsDone = _that.isStepDone(index);
-                _markup.push(<li key={index}>{_stepIsDone ? <i className="fa fa-li fa-check"></i> : <i className="fa fa-li fa-times"></i>}{step.stepName}
-                <button className="btn btn-primary" onClick={this.markAsDone.bind(this, index)}>
-                    {_stepIsDone ? "Not Done" : "Done"}</button><StopWatch ref={index} stepIndex={index} timeStamp={step.timeStamp} isDone={step.isDone} projectId={this.props.projectId} /></li>)
+                //_markup.push(<li key={index}>{_stepIsDone ? <i className="fa fa-li fa-check"></i> : <i className="fa fa-li fa-times"></i>}{step.stepName}
+                //<button className="btn btn-primary" onClick={this.markAsDone.bind(this, index)}>
+                //    {_stepIsDone ? "Not Done" : "Done"}</button><StopWatch ref={index} stepIndex={index} timeStamp={step.timeStamp} isDone={step.isDone} projectId={this.props.projectId} /></li>)
+
+                _markup.push(<tr key={index}><td className="col-md-1">{_stepIsDone ? <i className="fa fa-check"></i> : <i className="fa fa-times"></i>}</td>
+                <td className="col-md-5">{step.stepName}</td><td className="col-md-2"><StopWatch ref={index} stepIndex={index} timeStamp={step.timeStamp} isDone={step.isDone} projectId={this.props.projectId} /></td>
+                <td className="col-md-2"><button className="btn btn-primary" onClick={this.markAsDone.bind(this, index)}>{_stepIsDone ? "Not Done" : "Done"}</button></td></tr>)
             });
 
             _steps = _markup.map((node) => {
@@ -74,11 +78,19 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
                             <h3>{!_.isEmpty(this.data) ? this.data.title : "Loading your project"}</h3>
                         </div>
                         <div className="box-content padding">
-                            <div className="braggaList welcome">
-                                <ul className="braggaList fa-ul">
-                                    {this.renderList()}
-                                </ul>
-                            </div>
+                            <table className="table myTable">
+                                <thead className="noHeaderTable">
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {this.renderList()}
+                                </tbody>
+                            </table>
                             <button className="btn btn-primary" onClick={this.backToProjects}>Back to Projects</button>
                         </div>
                     </div>
@@ -121,8 +133,8 @@ var StopWatch = React.createClass({
     },
     render() {
         return (
-            <div>
-                <div>{this.formatTimeStamp()}</div>
+            <div className="row customDiv">
+                <div>{this.formatTimeStamp()}</div>&nbsp;&nbsp;
                 {this.props.isDone ? "" : <button className="btn btn-primary" onClick={this.manageStopWatch}>{this.state.clockIsRunning ? "Stop" : "Start"}</button>}
             </div>
         );

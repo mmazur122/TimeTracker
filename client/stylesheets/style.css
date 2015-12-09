@@ -150,6 +150,8 @@ th {
 .myTable {
     line-height: 56px;
     font-size: 18px;
+    table-layout: fixed;
+    word-wrap:break-word;
 }
 
 .createProject {
@@ -170,4 +172,17 @@ body {
 
 .loginButton {
     padding-bottom: 20px;
+}
+
+.noHeaderTable {
+    display: none;
+}
+
+.customDiv {
+    position: relative;
+    display: table;
+}
+
+.customDiv > div {
+    display:table-cell;
 }
