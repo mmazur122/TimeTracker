@@ -52,7 +52,7 @@ Meteor.timeTracker.reactComponents.signUpForm = React.createClass({
                     var _errorContext = {title: "Sign-up Error", messages: [error.reason]};
                     Meteor.timeTracker.modals.authenticationError(_errorContext);
                 } else {
-                    FlowRouter.go("/home");
+                    FlowRouter.go("/");
                 }
             });
         }

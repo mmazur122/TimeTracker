@@ -78,7 +78,7 @@ FlowRouter.route("/signUp", {
 });
 
 FlowRouter.route("/features", {
-    name: "login",
+    name: "features",
     action() {
         var FlowRouterLayout = Meteor.timeTracker.reactComponents.flowRouterLayout;
         ReactLayout.render(FlowRouterLayout, {

@@ -18,9 +18,9 @@ Meteor.timeTracker.reactComponents.header = React.createClass({
     getMeteorData() {
         var _data = {};
         if (Meteor.userId()) {
-            _data.menuLinks = ["home", "projects", "features", "logout"];
+            _data.menuLinks = ["home", "projects", "Todos", "logout"];
         } else {
-            _data.menuLinks = ["home", "features", "login"];
+            _data.menuLinks = ["home", "Todos", "login"];
         }
         return _data;
     },

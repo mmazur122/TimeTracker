@@ -160,7 +160,7 @@ th {
 }
 
 html {
-    background: url("http://www.comestilvuole.com/wp-content/uploads/2015/09/macchina-da-scrivere-copywriter.jpeg") no-repeat 50% 50% fixed;
+    background: url("/macchina-da-scrivere-copywriter.jpeg") no-repeat 50% 50% fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
