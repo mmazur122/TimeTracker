@@ -28,6 +28,7 @@ ul.icons > li {
 .braggaList, .braggaList > li > i {
     line-height: 56px;
     font-size: 20px;
+    word-wrap: break-word;
 }
 
 .braggaList .align-center {

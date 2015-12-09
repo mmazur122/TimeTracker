@@ -123,7 +123,7 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
     render() {
         return (
             <div className="row">
-                <div className="col-md-6 center">
+                <div className="col-md-10 center">
                     <div className="box box-bordered box-color">
                         <div className="box-title">
                             <input id="projectTitle" className="form-control" value={this.state.title}

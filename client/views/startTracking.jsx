@@ -57,7 +57,7 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
 
                 _markup.push(<tr key={index}><td className="col-md-1">{_stepIsDone ? <i className="fa fa-check"></i> : <i className="fa fa-times"></i>}</td>
                 <td className="col-md-5">{step.stepName}</td><td className="col-md-2"><StopWatch ref={index} stepIndex={index} timeStamp={step.timeStamp} isDone={step.isDone} projectId={this.props.projectId} /></td>
-                <td className="col-md-2"><button className="btn btn-primary" onClick={this.markAsDone.bind(this, index)}>{_stepIsDone ? "Not Done" : "Done"}</button></td></tr>)
+                <td className="col-md-1"><button className="btn btn-primary" onClick={this.markAsDone.bind(this, index)}>{_stepIsDone ? "Not Done" : "Done"}</button></td></tr>)
             });
 
             _steps = _markup.map((node) => {
