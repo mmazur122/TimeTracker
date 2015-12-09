@@ -71,8 +71,6 @@ h2 {
     margin-right: 5px;
 }
 
-
-
 .new-task input {
     box-sizing: border-box;
     padding: 10px 0;
@@ -143,4 +141,17 @@ li.emojiPicker:hover {
 
 .box-title {
     padding: 7px 10px 7px 10px !important;
+}
+
+th {
+    text-align: center !important;
+}
+
+.myTable {
+    line-height: 56px;
+    font-size: 18px;
+}
+
+.createProject {
+    margin-top: 40px;
 }

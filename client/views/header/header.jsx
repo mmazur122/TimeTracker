@@ -41,7 +41,11 @@ Meteor.timeTracker.reactComponents.header = React.createClass({
     },
     changeRoute(linkName) {
         this.setState({activeLink: linkName});
-        FlowRouter.go("/" + linkName);
+        var _route = "/";
+        if (linkName !== "home") {
+            _route += linkName;
+        }
+        FlowRouter.go(_route);
     },
     goHome() {
         FlowRouter.go("/home");

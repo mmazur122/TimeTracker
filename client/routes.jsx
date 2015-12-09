@@ -8,16 +8,6 @@ FlowRouter.route("/", {
     }
 });
 
-FlowRouter.route("/home", {
-    name: "home",
-    action() {
-        var FlowRouterLayout = Meteor.timeTracker.reactComponents.flowRouterLayout;
-        ReactLayout.render(FlowRouterLayout, {
-            content: <Meteor.timeTracker.reactComponents.homePage />
-        });
-    }
-});
-
 FlowRouter.route("/login", {
     name: "login",
     action() {

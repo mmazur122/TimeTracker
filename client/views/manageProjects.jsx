@@ -49,19 +49,34 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
         if (this.data && this.data.projects && this.data.projects.length !== 0) {
             _.each(this.data.projects, (project, index) => {
                 var _numberOfStepsDone = _that.getNumberOfStepsDone(index);
-                var _node = <li key={_counter++}>{_numberOfStepsDone === project.steps.length ?
-                <i className="fa fa-li fa-check"></i> :
-                <i className="fa fa-li fa-times"></i>}{project.title ? project.title : "Untitled"}
-                    &nbsp;({_numberOfStepsDone}/{project.steps.length} steps done, total time spent on the
-                    project: {_that.getTotalTime(index)})
-                    <button className="btn btn-primary pull-right" onClick={this.editProject.bind(this, project._id)}>
+                //var _node = <li key={_counter++}>{_numberOfStepsDone === project.steps.length ?
+                //<i className="fa fa-li fa-check"></i> :
+                //<i className="fa fa-li fa-times"></i>}{project.title ? project.title : "Untitled"}
+                //    &nbsp;({_numberOfStepsDone}/{project.steps.length} steps done, total time spent on the
+                //    project: {_that.getTotalTime(index)})
+                //    <button className="btn btn-primary pull-right" onClick={this.editProject.bind(this, project._id)}>
+                //        Edit
+                //    </button>
+                //    &nbsp;
+                //    <button className="btn btn-primary pull-right" onClick={this.trackTime.bind(this, project._id)}>Track
+                //        Time
+                //    </button>
+                //</li>;
+                var _node = <tr key={_counter++}>
+                    <td>{_numberOfStepsDone === project.steps.length ?
+                <i className="fa fa-check"></i> :
+                <i className="fa fa-times"></i>}</td>
+                <td>{project.title ? project.title : "Untitled"}</td>
+                    <td>{_numberOfStepsDone}</td>
+                    <td>{project.steps.length}</td>
+                    <td>{_that.getTotalTime(index)}</td>
+                    <td><a className="btn btn-primary" onClick={this.editProject.bind(this, project._id)}>
                         Edit
-                    </button>
-                    &nbsp;
-                    <button className="btn btn-primary pull-right" onClick={this.trackTime.bind(this, project._id)}>Track
+                    </a></td>
+                    <td><a className="btn btn-primary" onClick={this.trackTime.bind(this, project._id)}>Track
                         Time
-                    </button>
-                </li>;
+                    </a></td>
+                </tr>;
                 _markup.push(_node);
             });
         } else {
@@ -72,8 +87,8 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
             _markup.push(_node);
         }
 
-        _markup.push(<button key={_counter++} className="btn btn-primary pull-right" onClick={this.createProject}>Create
-            Project</button>);
+        //_markup.push(<button key={_counter++} className="btn btn-primary pull-right" onClick={this.createProject}>Create
+        //    Project</button>);
         var _ret;
         _ret = _markup.map((node) => {
             return node;
@@ -84,17 +99,30 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
     render() {
         return (
             <div className="row">
-                <div className="col-md-6 center">
+                <div className="col-md-10 center">
                     <div className="box box-bordered box-color">
                         <div className="box-title">
                             <h3>Here are your projects</h3>
                         </div>
                         <div className="box-content padding">
-                            <div className="braggaList welcome">
-                                <ul className="fa-ul braggaList">
-                                    {this.getProjects()}
-                                </ul>
-                            </div>
+                            <table className="table myTable text-center">
+                                <thead>
+                                <tr>
+                                    <th>Done</th>
+                                    <th>Title</th>
+                                    <th>Steps Done</th>
+                                    <th>Total Steps</th>
+                                    <th>Total Time</th>
+                                    <th>Edit</th>
+                                    <th>Track Time</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {this.getProjects()}
+                                </tbody>
+                            </table>
+                            <button className="btn btn-primary pull-right createProject" onClick={this.createProject}>Create
+                                Project</button>
                         </div>
                     </div>
                 </div>
