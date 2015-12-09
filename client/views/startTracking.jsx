@@ -112,7 +112,6 @@ var StopWatch = React.createClass({
         } else {
             var _that = this;
             this.runStopWatch = Meteor.setInterval(() => {
-                console.log("refreshing state");
                 _that.setState({currentTimeStamp: _that.state.currentTimeStamp + 1});
             }, 1000);
         }

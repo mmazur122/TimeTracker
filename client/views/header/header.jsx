@@ -27,7 +27,6 @@ Meteor.timeTracker.reactComponents.header = React.createClass({
     getMenuLinks() {
         var _markup = [];
         _.each(this.data.menuLinks, (menuLinkName, index) => {
-            console.log("this inside getMenuLinks: ", this);
             _markup.push(<li className="topNav"
                              onClick={this.changeRoute.bind(this, menuLinkName)} key={index}>
                 <a>{unCamelCase(menuLinkName)}</a></li>);

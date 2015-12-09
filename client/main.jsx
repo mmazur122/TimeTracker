@@ -6,30 +6,24 @@ if (!Meteor.timeTracker.reactComponents) {
     Meteor.timeTracker.reactComponents = {};
 }
 
-var App = React.createClass({
-    mixins: [ReactMeteorData],
-    _refreshTracker: new ReactiveVar(0),
-    getMeteorData() {
-        console.log("inside getMeteorData");
-        return {
-            // this causes the component to refresh and pass the right active link to the Content Component
-            activeLink: this._refreshTracker.get()
-        };
-    },
-    componentDidMount() {
-        this._refreshTracker.set("home");
-    },
+var ReactTransitionGroup = React.addons.TransitionGroup;
+
+Meteor.timeTracker.reactComponents.flowRouterLayout = React.createClass({
     render() {
         var _header = Meteor.timeTracker.reactComponents.header;
-        var _content = Meteor.timeTracker.reactComponents.content;
         var _menuLinks = ["home", "startTracking", "features", "login"];
+        var _timeStamp = moment().valueOf();
         return (
             <div className="container-fluid">
                 <div id="wrapper">
-                    <_header menuLinks={_menuLinks} refreshTracker={this._refreshTracker}/>
+                    <_header menuLinks={_menuLinks}/>
                     <div className="container">
                         <div id="main">
-                            <_content activeLink={this.data.activeLink}/>
+                            <ReactTransitionGroup>
+                                <PageTransition key={_timeStamp}>
+                                    {this.props.content}
+                                </PageTransition>
+                            </ReactTransitionGroup>
                         </div>
                     </div>
                 </div>
@@ -39,22 +33,19 @@ var App = React.createClass({
     }
 });
 
-Meteor.timeTracker.reactComponents.flowRouterLayout = React.createClass({
+var PageTransition = React.createClass({
+    componentWillLeave(callback) {
+        var _oldElement = ReactDOM.findDOMNode(this);
+        var _newElement = $(_oldElement).siblings().not($("div[data-reactid$='" + this.props.timestamp + "']"));
+        $(_newElement).css({"opacity": 0, "display": "none"});
+        $(_oldElement).animate({"opacity": 0}, 400, "swing", function() {
+            $(_oldElement).css({"display": "none"});
+            $(_newElement).css({"display": "block"}).animate({"opacity": 1}, 400, "swing", callback);
+        });
+    },
     render() {
-        var _header = Meteor.timeTracker.reactComponents.header;
-        var _menuLinks = ["home", "startTracking", "features", "login"];
         return (
-            <div className="container-fluid">
-                <div id="wrapper">
-                    <_header menuLinks={_menuLinks}/>
-                    <div className="container">
-                        <div id="main">
-                            {this.props.content}
-                        </div>
-                    </div>
-                </div>
-                <div id="footer"></div>
-            </div>
+            <div data-timestamp={this.props.children.key}>{this.props.children}</div>
         );
     }
 });
