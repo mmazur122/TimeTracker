@@ -5,21 +5,38 @@
 }
 
 #main {
-    margin-top: 80px !important;
+    margin-top: 350px !important;
     margin-left: 0px !important;
-    background: #F2F2F2;
+    background: transparent !important;
+    justify-content: center;
 }
 
 .container {
     width: 1100px !important;
 }
 
-body {
-    background: #F2F2F2;
-}
+/*body {*/
+    /*background: #F2F2F2;*/
+/*}*/
 
 .row {
     margin-right: 0px;
     margin-left: 0px;
     margin-bottom: 10px;
+}
+
+.box-content {
+    opacity: 0.95 !important;
+}
+
+.box-title {
+    opacity: 0.9 !important;
+}
+
+.myNavbar {
+    opacity: 0.9 !important;
+}
+
+.box {
+    box-shadow: none !important;
 }

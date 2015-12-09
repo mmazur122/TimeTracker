@@ -61,7 +61,7 @@ Meteor.timeTracker.reactComponents.header = React.createClass({
     },
     render() {
         return (
-            <div id="navigation" className="navbar-fixed-top">
+            <div id="navigation" className="navbar-fixed-top myNavbar">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4">
