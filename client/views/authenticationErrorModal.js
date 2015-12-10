@@ -8,24 +8,24 @@ if (!Meteor.timeTracker.modals) {
     Meteor.timeTracker.modals = {};
 }
 
-Template.authenticationError.helpers({
-    errorMessage() {
+Template.myModal.helpers({
+    message() {
         var _ret = "";
-        _.each(Session.get("errorMessages"), (errorMessage) => {
-            _ret += errorMessage + "\n";
+        _.each(Session.get("messages"), (message) => {
+            _ret += message + "\n";
         });
         return _ret;
     }
 });
 
-Meteor.timeTracker.modals.authenticationError = function (errorContext) {
+Meteor.timeTracker.modals.myModal = function (context) {
     var _opts = {
         withCancel: false,
         closeOnOk: true,
         okLabel: "Close"
     };
 
-    var _title = errorContext.title;
-    Session.set("errorMessages", errorContext.messages);
-    window.timeTracker.modals.initAndShow(Template.authenticationError, _title, _opts);
+    var _title = context.title;
+    Session.set("messages", context.messages);
+    window.timeTracker.modals.initAndShow(Template.myModal, _title, _opts);
 };

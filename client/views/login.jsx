@@ -32,13 +32,13 @@ Meteor.timeTracker.reactComponents.loginForm = React.createClass({
                 _errorMessages.push("Your password must be at least 6 characters long.");
             }
             var _errorContext = {title: "Login Error", messages: _errorMessages};
-            Meteor.timeTracker.modals.authenticationError(_errorContext);
+            Meteor.timeTracker.modals.myModal(_errorContext);
         } else {
             Meteor.loginWithPassword(_email, _password, function (error) {
                 if (error) {
                     console.log("error: ", error);
                     var _errorContext = {title: "Login Error", messages: [error.reason]};
-                    Meteor.timeTracker.modals.authenticationError(_errorContext);
+                    Meteor.timeTracker.modals.myModal(_errorContext);
                 } else {
                     FlowRouter.go("/");
                 }

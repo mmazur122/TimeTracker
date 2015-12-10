@@ -73,7 +73,7 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
                 title: "Error",
                 messages: ["Your project is empty! You don't want to save an empty project, do you?"]
             };
-            Meteor.timeTracker.modals.authenticationError(_errorContext);
+            Meteor.timeTracker.modals.myModal(_errorContext);
             return;
         }
         if (this.state.title === "Untitled") {
@@ -81,7 +81,7 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
                 title: "Warning",
                 messages: ["Please change the title of your project. "]
             };
-            Meteor.timeTracker.modals.authenticationError(_errorContext);
+            Meteor.timeTracker.modals.myModal(_errorContext);
             return;
         }
 
@@ -97,7 +97,7 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
                         title: "Saving Error",
                         messages: ["Could not save your project"]
                     };
-                    Meteor.timeTracker.modals.authenticationError(_errorContext);
+                    Meteor.timeTracker.modals.myModal(_errorContext);
                 } else {
                     FlowRouter.go("/projects");
                 }
@@ -110,7 +110,7 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
                         title: "Saving Error",
                         messages: ["Could not save your project"]
                     };
-                    Meteor.timeTracker.modals.authenticationError(_errorContext);
+                    Meteor.timeTracker.modals.myModal(_errorContext);
                 } else {
                     FlowRouter.go("/projects");
                 }
@@ -119,6 +119,9 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
     },
     updateTitle(event) {
         this.setState({title: event.target.value});
+    },
+    cancel() {
+        FlowRouter.go("/projects");
     },
     render() {
         return (
@@ -138,6 +141,8 @@ Meteor.timeTracker.reactComponents.createProject = React.createClass({
                                 <button className="btn btn-primary" onClick={this.addToList}>Add to List</button>
                                 &nbsp;
                                 <button className="btn btn-primary" onClick={this.saveProject}>Save Project</button>
+                                &nbsp;
+                                <button className="btn btn-primary" onClick={this.cancel}>Cancel</button>
                             </div>
                         </div>
                     </div>

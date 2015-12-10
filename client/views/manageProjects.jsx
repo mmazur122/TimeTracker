@@ -46,33 +46,26 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
         var _markup = [];
         var _counter = 0;
         var _that = this;
-        if (this.data && this.data.projects && this.data.projects.length !== 0) {
-            _.each(this.data.projects, (project, index) => {
-                var _numberOfStepsDone = _that.getNumberOfStepsDone(index);
-                var _node = <tr key={_counter++}>
-                    <td>{_numberOfStepsDone === project.steps.length ?
+
+        _.each(this.data.projects, (project, index) => {
+            var _numberOfStepsDone = _that.getNumberOfStepsDone(index);
+            var _node = <tr key={_counter++}>
+                <td>{_numberOfStepsDone === project.steps.length ?
                 <i className="fa fa-check"></i> :
                 <i className="fa fa-times"></i>}</td>
                 <td>{project.title ? project.title : "Untitled"}</td>
-                    <td>{_numberOfStepsDone}</td>
-                    <td>{project.steps.length}</td>
-                    <td>{_that.getTotalTime(index)}</td>
-                    <td><a className="btn btn-primary" onClick={this.editProject.bind(this, project._id)}>
-                        Edit
-                    </a></td>
-                    <td><a className="btn btn-primary" onClick={this.trackTime.bind(this, project._id)}>Track
-                        Time
-                    </a></td>
-                </tr>;
-                _markup.push(_node);
-            });
-        } else {
-            var _node = <div key={_counter++}>
-                <div>Oops! Looks like you don't have any projects. Would you like to create one?</div>
-            </div>;
-
+                <td>{_numberOfStepsDone}</td>
+                <td>{project.steps.length}</td>
+                <td>{_that.getTotalTime(index)}</td>
+                <td><a className="btn btn-primary" onClick={this.editProject.bind(this, project._id)}>
+                    Edit
+                </a></td>
+                <td><a className="btn btn-primary" onClick={this.trackTime.bind(this, project._id)}>Track
+                    Time
+                </a></td>
+            </tr>;
             _markup.push(_node);
-        }
+        });
 
         var _ret;
         _ret = _markup.map((node) => {
@@ -90,7 +83,7 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
                             <h3>Here are your projects</h3>
                         </div>
                         <div className="box-content padding">
-                            <table className="table myTable text-center">
+                            {this.data && this.data.projects && this.data.projects.length !== 0 ? <table className="table myTable text-center">
                                 <thead>
                                 <tr>
                                     <th>Done</th>
@@ -105,7 +98,7 @@ Meteor.timeTracker.reactComponents.manageProjects = React.createClass({
                                 <tbody>
                                 {this.getProjects()}
                                 </tbody>
-                            </table>
+                            </table> : <div className="myTable">Oops! Looks like you don't have any projects. Would you like to create one?</div>}
                             <button className="btn btn-primary pull-right createProject" onClick={this.createProject}>Create
                                 Project</button>
                         </div>

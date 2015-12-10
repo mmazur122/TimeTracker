@@ -33,7 +33,7 @@ Meteor.timeTracker.reactComponents.startTracking = React.createClass({
         }
         if (this.allStepsAreDone(_steps)) {
             var _errorContext = {title: "Congratulations", messages: ["You have just completed all steps in your project - " + this.data.title + "!"]};
-            Meteor.timeTracker.modals.authenticationError(_errorContext);
+            Meteor.timeTracker.modals.myModal(_errorContext);
         }
     },
     allStepsAreDone(steps) {
@@ -121,6 +121,7 @@ var StopWatch = React.createClass({
         Projects.update({_id: this.props.projectId}, $set);
     },
     componentWillUnmount() {
+        Meteor.clearInterval(this.runStopWatch);
         this.updateStepTimeStamp();
     },
     formatTimeStamp() {

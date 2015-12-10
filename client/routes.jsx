@@ -21,8 +21,9 @@ FlowRouter.route("/login", {
 FlowRouter.route("/logout", {
     name: "logout",
     action() {
-        Meteor.logout();
-        FlowRouter.go("/");
+        Meteor.logout(function() {
+            FlowRouter.go("/");
+        });
     }
 });
 
@@ -77,12 +78,12 @@ FlowRouter.route("/signUp", {
     }
 });
 
-FlowRouter.route("/features", {
-    name: "features",
+FlowRouter.route("/todos", {
+    name: "todos",
     action() {
         var FlowRouterLayout = Meteor.timeTracker.reactComponents.flowRouterLayout;
         ReactLayout.render(FlowRouterLayout, {
-            content: <Meteor.timeTracker.reactComponents.features />
+            content: <Meteor.timeTracker.reactComponents.todos />
         });
     }
 });

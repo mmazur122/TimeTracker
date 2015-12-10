@@ -8,7 +8,7 @@ if (!Meteor.timeTracker.modals) {
     Meteor.timeTracker.modals = {};
 }
 
-Meteor.timeTracker.reactComponents.features = React.createClass({
+Meteor.timeTracker.reactComponents.todos = React.createClass({
     getTodos(todos) {
         var _markup = todos.map((todo, index) => {
             return <li key={index}><i className="fa fa-li fa-check"></i>{todo}</li>
@@ -19,6 +19,7 @@ Meteor.timeTracker.reactComponents.features = React.createClass({
         })
     },
     todos: [
+        "Come up with a better name",
         "Add cell phone support",
         "Add indented step lists",
         "Add option to change user password",
